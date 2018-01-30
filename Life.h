@@ -70,11 +70,11 @@ class Creature
 class World
 {
 public:
-	// The world is square, len describes the length of a side.
-	unsigned int len;
+	// The world is square, world_len describes the length of a side.
+	unsigned int world_len;
 
 	World();
-	World(unsigned int len, unsigned int rand_seed);
+	World(unsigned int world_len, unsigned int rand_seed);
 	~World();
 	
 	Creature * get_creature(unsigned int row, unsigned int col);
@@ -85,7 +85,7 @@ public:
 private:
 	Creature **creatures;
 
-	// Total number of creatures in the world (len ^ 2).
+	// Total number of creatures in the world (world_len ^ 2).
 	unsigned int world_size;
 
 	unsigned int rand_seed;
@@ -103,7 +103,7 @@ class LifeRenderer
 public:
 	virtual ~LifeRenderer() {}
 
-	virtual void render_frame(unsigned int frame, World *world) = 0;
+	virtual void render_generation(unsigned int generation, World *world) = 0;
 };
 
 
@@ -115,7 +115,7 @@ class TerminalLifeRenderer : public LifeRenderer
 public:
 	~TerminalLifeRenderer() {}
 
-	void render_frame(unsigned int frame, World *world);
+	void render_generation(unsigned int generation, World *world);
 };
 
 
